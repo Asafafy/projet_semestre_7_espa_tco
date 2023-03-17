@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "760791304906",
+    "project_id": "projet-semestre-7-espa-tco",
+    "storage_bucket": "projet-semestre-7-espa-tco.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760791304906:android:ddec8057360265798c4233",
+        "android_client_info": {
+          "package_name": "com.example.projet_semestre_7_espa_tco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760791304906-3hsibemso3osd36fpkc98806273uflm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7v211mRcXeIdQggfQCfRA3ugdU76NF_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760791304906-3hsibemso3osd36fpkc98806273uflm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
