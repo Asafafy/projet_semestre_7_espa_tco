@@ -1,14 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class ServicesAuthentifications{
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
 
   //  Fonction S'inscrire
-  Future sInscrire(String email, String motDePasse, BuildContext context) async {
+  Future sInscrire(String nom, String email, String motDePasse, bool valCheckbox, BuildContext context) async {
     try {
       UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: motDePasse);
       return userCredential.user;
@@ -40,7 +40,7 @@ class ServicesAuthentifications{
       UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(email: email, password: motDePasse);
       return userCredential.user;
     } on FirebaseAuthException catch(e) {
-      String messageDErreur = "";
+      String messageDErreur;
       switch (e.code) {
         case 'invalid-email':
           messageDErreur = 'L\'adresse e-mail est mal formatée.';
@@ -66,4 +66,5 @@ class ServicesAuthentifications{
   Future seDeconnecter() async {
     await firebaseAuth.signOut();
   }
+
 }

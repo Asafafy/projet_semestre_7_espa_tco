@@ -1,27 +1,35 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/accueil.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/s_inscrire.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../services/servicesAuthentifications.dart';
+import '../../services/authentificationDocteur.dart';
 
-class SeConnecter extends StatefulWidget {
+
+
+class ConnexionDocteur extends StatefulWidget {
+  User patient;
+  Timestamp? dateOrdonnanceMedicale;
+  bool estEdition;
+  ConnexionDocteur(this.patient, this.dateOrdonnanceMedicale, this.estEdition);
+
   @override
-  State<SeConnecter> createState() => _SeConnecterState();
+  State<ConnexionDocteur> createState() => _ConnexionDocteurState();
 }
 
-class _SeConnecterState extends State<SeConnecter> {
-  TextEditingController controlleurEmail = TextEditingController();
-  TextEditingController controlleurMotDePasse = TextEditingController();
+class _ConnexionDocteurState extends State<ConnexionDocteur> {
+  TextEditingController controlleurNomDocteur = TextEditingController();
+  TextEditingController controlleurMotDePasseDocteur = TextEditingController();
 
   bool chargement = false;
+
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Se connecter"),
+        title: Text("Authentification du Docteur"),
         centerTitle: true,
         backgroundColor: Colors.orange.shade100,
         foregroundColor: Colors.black54,
@@ -32,9 +40,9 @@ class _SeConnecterState extends State<SeConnecter> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 30.0, right: 20.0),
             child: TextField(
-              controller: controlleurEmail,
+              controller: controlleurNomDocteur,
               decoration: InputDecoration(
-                labelText: "Email",
+                labelText: "Nom du docteur",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -45,9 +53,9 @@ class _SeConnecterState extends State<SeConnecter> {
             child: TextField(
               obscuringCharacter: "*",
               obscureText: true,
-              controller: controlleurMotDePasse,
+              controller: controlleurMotDePasseDocteur,
               decoration: InputDecoration(
-                labelText: "Mot de passe",
+                labelText: "Mot de passe du docteur",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -64,15 +72,10 @@ class _SeConnecterState extends State<SeConnecter> {
                   setState(() {
                     chargement = true;
                   });
-                  if (controlleurEmail.text == ""  || controlleurMotDePasse.text == "") {
+                  if (controlleurNomDocteur.text == ""  || controlleurMotDePasseDocteur.text == "") {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Tous les champs sont requis !"), backgroundColor: Colors.red,));
                   } else {
-                    User? resultat = await ServicesAuthentifications().seConnecter(controlleurEmail.text, controlleurMotDePasse.text, context);
-                    if (resultat != null) {
-                      print("Connexion avec succès");
-                      print(resultat.email);
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Accueil()), (route) => false);
-                    }
+                    await AuthentificationDocteur().seConnecterDocteur(controlleurNomDocteur.text, controlleurMotDePasseDocteur.text, widget.patient, widget.estEdition, widget.dateOrdonnanceMedicale, context);
                   }
                   setState(() {
                     chargement = false;
@@ -82,12 +85,13 @@ class _SeConnecterState extends State<SeConnecter> {
             ),
           ),
           SizedBox(height: 20.0,),
-          TextButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>SInscrire()));
-            },
-            child: Text("Vous n'avez pas de compte? Créez-en un")
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.info, color: Colors.green,),
+              Text("  Contactez le responsable pour avoir un compte docteur", style: TextStyle(fontStyle: FontStyle.italic, color: Colors.green)),
+            ],
+          )
         ],
       ),
     );
