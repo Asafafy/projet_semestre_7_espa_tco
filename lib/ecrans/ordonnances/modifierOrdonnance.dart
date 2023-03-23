@@ -1,17 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/ajouterMedicaments.dart';
 import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/listeMedicaments.dart';
 import 'package:projet_semestre_7_espa_tco/models/modeleMedicaments.dart';
 import 'package:projet_semestre_7_espa_tco/models/modeleOrdonnanceMedicale.dart';
+import '../../couleurs/couleurs.dart';
 import '../../services/servicesFirestoreOrdonnance.dart';
 
 class ModifierOrdonnance extends StatefulWidget {
   User patient;
   ModeleOrdonnanceMedicale ordonnance;
   ModeleMedicament? medicament;
+
   ModifierOrdonnance(this.ordonnance, this.patient, this.medicament);
 
   @override
@@ -20,7 +20,8 @@ class ModifierOrdonnance extends StatefulWidget {
 
 class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
   TextEditingController controlleurMaladie = TextEditingController();
-  TextEditingController controlleurDescriptionsMaladie = TextEditingController();
+  TextEditingController controlleurDescriptionsMaladie =
+      TextEditingController();
   bool chargement = false;
 
   @override
@@ -36,8 +37,8 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
       appBar: AppBar(
         title: Text("Modifier des notes"),
         centerTitle: true,
-        backgroundColor: Colors.orange.shade100,
-        foregroundColor: Colors.black54,
+        backgroundColor: CouleursApplications.appBarVert,
+        foregroundColor: CouleursApplications.textesAppBar,
         actions: [
           IconButton(
             onPressed: () async {
@@ -46,120 +47,204 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text("Confirmation de la suppresion"),
-                    content: Text("Êtes-vous sûr de vouloir supprimer cette ordonnance ?"),
+                    content: Text(
+                        "Êtes-vous sûr de vouloir supprimer cette ordonnance ?"),
                     actions: [
                       TextButton(
                         onPressed: () async {
-                          await ServicesFirestoreOrdonnances().supprimmerOrdonnance(widget.ordonnance.id);
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ListeOrdonnances(widget.patient)), (route) => false);
+                          await ServicesFirestoreOrdonnances()
+                              .supprimmerOrdonnance(widget.ordonnance.id);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ListeOrdonnances(widget.patient)),
+                              (route) => false);
                         },
                         child: Text("Oui"),
                       ),
                       TextButton(
                         child: Text("Non"),
-                        onPressed: () {Navigator.pop(context);},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   );
                 },
               );
             },
-            icon: Icon(Icons.delete, color: Colors.red,)
+            icon: Icon(
+              Icons.delete,
+              color: CouleursApplications.textesAppBar,
+            ),
           ),
         ],
       ),
-
-
-
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+          color: CouleursApplications.fondApplication,
+          child: ListView(
             children: [
-              Text(
-                "Titre",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+              Container(
+                color: CouleursApplications.appBarVert,
+                child: Image(
+                  image: AssetImage('images/header-ordonnance-medicale.png'),
                 ),
               ),
-              SizedBox(height: 20.0,),
-              TextField(
-                controller: controlleurMaladie,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
+              SizedBox(
+                height: 40.0,
               ),
-              SizedBox(height: 40.0,),
-              Text(
-                "Descriptions",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 20.0,),
-              TextField(
-                controller: controlleurDescriptionsMaladie,
-                minLines: 5,
-                maxLines: 10,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 50.0,),
-              Center(
-                child: ElevatedButton(
-                  child: Text("Voir médicaments"),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ListeMedicaments(widget.patient, widget.ordonnance)));
-                  },
-                ),
-              ),
-              SizedBox(height: 50.0,),
-              chargement ? Center(child: CircularProgressIndicator(),) : Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  child: Text(
-                    "Mettre à jour les notes",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  elevation: 5,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Text(
+                          "MALADIES",
+                          style: TextStyle(
+                            color: CouleursApplications.appBarVert,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: TextField(
+                          minLines: 2,
+                          maxLines: 5,
+                          controller: controlleurMaladie,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Text(
+                          "DESCRIPTIONS",
+                          style: TextStyle(
+                            color: CouleursApplications.appBarVert,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: TextField(
+                          controller: controlleurDescriptionsMaladie,
+                          minLines: 6,
+                          maxLines: 10,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                          child: Text(
+                            "Liste des medicaments",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: CouleursApplications.textesAppBar),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: CouleursApplications.fondListTile, // Set background color here
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListeMedicaments(
+                                        widget.patient, widget.ordonnance)));
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      chargement
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "Mettre à jour",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: CouleursApplications.textesAppBar),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: CouleursApplications
+                                      .appBarVert, // Set background color here
+                                ),
+                                onPressed: () async {
+                                  if (controlleurMaladie.text == "" ||
+                                      controlleurDescriptionsMaladie.text ==
+                                          "") {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content:
+                                          Text("Tous les champs sont requis"),
+                                      backgroundColor: Colors.red,
+                                    ));
+                                  } else {
+                                    setState(() {
+                                      chargement = true;
+                                    });
+                                    await ServicesFirestoreOrdonnances()
+                                        .mettreAJourOrdonnance(
+                                            widget.ordonnance.id,
+                                            controlleurMaladie.text,
+                                            controlleurDescriptionsMaladie
+                                                .text);
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ListeOrdonnances(
+                                                    widget.patient)),
+                                        (route) => false);
+                                    setState(() {
+                                      chargement = false;
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                      SizedBox(height: 30,),
+                    ],
                   ),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orangeAccent.shade200),
-                  onPressed: () async {
-                    if (controlleurMaladie.text == "" || controlleurDescriptionsMaladie.text == "") {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Tous les champs sont requis"),backgroundColor: Colors.red,));
-                    } else {
-                      setState(() {
-                        chargement = true;
-                      });
-                      await ServicesFirestoreOrdonnances().mettreAJourOrdonnance(widget.ordonnance.id, controlleurMaladie.text, controlleurDescriptionsMaladie.text);
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ListeOrdonnances(widget.patient)), (route) => false);
-                      setState(() {
-                        chargement = false;
-                      });
-                    }
-                  },
                 ),
               ),
             ],
           ),
         ),
-      ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

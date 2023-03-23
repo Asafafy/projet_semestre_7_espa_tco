@@ -5,8 +5,7 @@ import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/ajoute
 import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/modifierMedicament.dart';
 import 'package:projet_semestre_7_espa_tco/models/modeleMedicaments.dart';
 import 'package:projet_semestre_7_espa_tco/models/modeleOrdonnanceMedicale.dart';
-
-import '../../authentificationsDocteurs/connexion_docteur.dart';
+import '../../../couleurs/couleurs.dart';
 
 class ListeMedicaments extends StatelessWidget {
   User patient;
@@ -22,8 +21,8 @@ class ListeMedicaments extends StatelessWidget {
       appBar: AppBar(
         title: Text("Liste des médicaments"),
         centerTitle: true,
-        backgroundColor: Colors.orange.shade100,
-        foregroundColor: Colors.black54,
+        backgroundColor: CouleursApplications.appBarVert,
+        foregroundColor: CouleursApplications.textesAppBar,
       ),
 
 
@@ -41,12 +40,27 @@ class ListeMedicaments extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     ModeleMedicament medicament = ModeleMedicament.fromJson(snapshot.data.docs[index]);
                     return Card(
-                      color: Colors.teal.shade200,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      elevation: 5,
+                      color: Colors.green.shade100,
                       margin: EdgeInsets.all(10.0),
                       child: ListTile(
+                        leading: IconButton(
+                          icon: CircleAvatar(
+                              backgroundColor: CouleursApplications.appBarVert,
+                              foregroundColor: CouleursApplications.textesAppBar,
+                              child: Icon(Icons.list)),
+                          onPressed: () async {},
+                        ),
                         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        title: Text(medicament.nomMedicament, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
-                        subtitle: Text(medicament.nbrJour, overflow: TextOverflow.ellipsis, maxLines: 2,),
+                        title: Text(medicament.nomMedicament, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
+                        subtitle: Text(
+                          "Matin : " + medicament.matin + "     Midi : " + medicament.midi + "     Soir : " + medicament.soir + "     Minuit : " + medicament.minuit,
+                          overflow: TextOverflow.ellipsis, maxLines: 2,
+                        ),
+                        trailing: Text(medicament.nbrJour + "jrs"),
                         onTap: () {
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ModifierMedicaments(ordonnanceMedicale, patient, medicament)), (route) => false,);
                         },
@@ -70,8 +84,8 @@ class ListeMedicaments extends StatelessWidget {
 
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange.shade100,
-        foregroundColor: Colors.black54,
+        backgroundColor: CouleursApplications.appBarVert,
+        foregroundColor: CouleursApplications.textesAppBar,
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AjouterMedicaments(patient, ordonnanceMedicale, null)));
