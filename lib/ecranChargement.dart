@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EcranChargement extends StatelessWidget {
+  const EcranChargement({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,7 +12,7 @@ class EcranChargement extends StatelessWidget {
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Image(
                   image: AssetImage('images/ordonnance.png'),
                   width: 300,
