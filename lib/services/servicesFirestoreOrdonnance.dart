@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/modeleOrdonnanceMedicale.dart';
 
 class ServicesFirestoreOrdonnances {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -17,7 +16,6 @@ class ServicesFirestoreOrdonnances {
         "date" : DateTime.now(),
       });
     } catch (e) {
-      print(e);
     }
   }
 
@@ -31,7 +29,6 @@ class ServicesFirestoreOrdonnances {
         "descriptionsMaladie" : descriptionsMaladie,
       });
     } catch(e) {
-      print(e);
     }
   }
 
@@ -42,7 +39,6 @@ class ServicesFirestoreOrdonnances {
     try {
       await firestore.collection('ordonnancesMedicales').doc(idDoc).delete();
     } catch(e) {
-      print(e);
     }
   }
 }

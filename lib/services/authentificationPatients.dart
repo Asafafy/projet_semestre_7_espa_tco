@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 
 class ServicesAuthentifications{
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -29,7 +27,6 @@ class ServicesAuthentifications{
       }
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messageDErreur), backgroundColor: Colors.red,));
     } catch(e) {
-      print(e);
     }
   }
 

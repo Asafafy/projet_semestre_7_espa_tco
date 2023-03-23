@@ -1,13 +1,11 @@
+import 'package:Ordonnances/services/servicesFirestoreMedicaments.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/listeMedicaments.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/modifierOrdonnance.dart';
-import 'package:projet_semestre_7_espa_tco/services/servicesFirestoreMedicaments.dart';
 
 import '../../../couleurs/couleurs.dart';
 import '../../../models/modeleMedicaments.dart';
 import '../../../models/modeleOrdonnanceMedicale.dart';
+import '../listeOrdonnances.dart';
 
 class AjouterMedicaments extends StatefulWidget {
   User patient;
@@ -32,7 +30,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ajouter Médicaments"),
+        title: const Text("Ajouter Médicaments"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -43,35 +41,35 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
           children: [
             Container(
               color: CouleursApplications.appBarVert,
-              child: Image(
+              child: const Image(
                 image: AssetImage('images/header-ordonnance-medicale.png'),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Card(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
-                    Text(
+                    const Text(
                       "Nom du médicament",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15.0,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: TextField(
                         controller: controlleurNomMedicament,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text(
                             "exemple Nom Médicament",
                             style: TextStyle(color: Colors.grey),
@@ -80,7 +78,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     Row(
@@ -88,10 +86,10 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 "Matin",
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15.0,
                               ),
                               Padding(
@@ -99,7 +97,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                                     horizontal: 15.0),
                                 child: TextField(
                                   controller: controlleurMatin,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     label: Text(
                                       "Quantité Prise",
                                       style: TextStyle(color: Colors.grey),
@@ -114,10 +112,10 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 "Midi",
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15.0,
                               ),
                               Padding(
@@ -125,7 +123,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                                     horizontal: 15.0),
                                 child: TextField(
                                   controller: controlleurMidi,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     label: Text(
                                       "Quantité Prise",
                                       style: TextStyle(color: Colors.grey),
@@ -139,7 +137,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     Row(
@@ -147,10 +145,10 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 "Soir",
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15.0,
                               ),
                               Padding(
@@ -158,7 +156,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                                     horizontal: 15.0),
                                 child: TextField(
                                   controller: controlleurSoir,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     label: Text(
                                       "Quantité Prise",
                                       style: TextStyle(color: Colors.grey),
@@ -173,10 +171,10 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 "Minuit",
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15.0,
                               ),
                               Padding(
@@ -184,7 +182,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                                     horizontal: 15.0),
                                 child: TextField(
                                   controller: controlleurMinuit,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     label: Text(
                                       "Quantité Prise",
                                       style: TextStyle(color: Colors.grey),
@@ -198,20 +196,20 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
-                    Text(
+                    const Text(
                       "Durrée de la prise (en jour)",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15.0,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: TextField(
                         controller: controlleurJourPrise,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text(
                             "xx jours (nombre)",
                             style: TextStyle(color: Colors.grey),
@@ -220,11 +218,11 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     ElevatedButton(
-                      child: Text(
+                      child: const Text(
                         "Enregistrer",
                         style: TextStyle(
                             fontSize: 20,
@@ -237,19 +235,19 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                       onPressed: () async {
                         if (controlleurNomMedicament.text == "" ||
                             controlleurMatin.text == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Tous les champs sont requis !"),
                             backgroundColor: Colors.red,
                           ));
                         } else if (controlleurMidi.text == "" ||
                             controlleurSoir.text == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Tous les champs sont requis !"),
                             backgroundColor: Colors.red,
                           ));
                         } else if (controlleurMinuit.text == "" ||
                             controlleurJourPrise.text == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Tous les champs sont requis !"),
                             backgroundColor: Colors.red,
                           ));
@@ -280,7 +278,7 @@ class _AjouterMedicamentsState extends State<AjouterMedicaments> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                   ],

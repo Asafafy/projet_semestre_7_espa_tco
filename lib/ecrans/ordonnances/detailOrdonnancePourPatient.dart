@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../../couleurs/couleurs.dart';
 import '../../models/modeleMedicaments.dart';
@@ -37,7 +36,7 @@ class _DetailOrdonnancePourPatientState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Détail Ordonnance"),
+        title: const Text("Détail Ordonnance"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -47,19 +46,19 @@ class _DetailOrdonnancePourPatientState
         color: CouleursApplications.fondApplication,
         child: Column(
           children: [
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Card(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30.0),
                         child: Text(
                         "MALADIES",
@@ -70,11 +69,11 @@ class _DetailOrdonnancePourPatientState
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5.0,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: TextField(
                         enabled: false,
                         minLines: 1,
@@ -82,10 +81,10 @@ class _DetailOrdonnancePourPatientState
                         controller: controlleurMaladie,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
                         "DESCRIPTIONS",
@@ -97,7 +96,7 @@ class _DetailOrdonnancePourPatientState
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: TextField(
                         enabled: false,
                         controller: controlleurDescriptionsMaladie,
@@ -105,7 +104,7 @@ class _DetailOrdonnancePourPatientState
                         maxLines: 10,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                   ],
@@ -113,9 +112,9 @@ class _DetailOrdonnancePourPatientState
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 "LISTE DES MEDICAMENTS",
@@ -127,17 +126,17 @@ class _DetailOrdonnancePourPatientState
               ),
             ),
 
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
 
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Card(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('ordonnancesMedicales')
@@ -156,17 +155,17 @@ class _DetailOrdonnancePourPatientState
                                   ),
                                   elevation: 5,
                                   color: Colors.green.shade100,
-                                  margin: EdgeInsets.all(10.0),
+                                  margin: const EdgeInsets.all(10.0),
                                   child: ListTile(
                                     leading: IconButton(
-                                      icon: CircleAvatar(
+                                      icon: const CircleAvatar(
                                           backgroundColor: CouleursApplications.appBarVert,
                                           foregroundColor: CouleursApplications.textesAppBar,
                                           child: Icon(Icons.list)),
                                       onPressed: () async {},
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                    title: Text(medicament.nomMedicament, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    title: Text(medicament.nomMedicament, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
                                     subtitle: Text(
                                       "Matin : " + medicament.matin + "     Midi : " + medicament.midi + "     Soir : " + medicament.soir + "     Minuit : " + medicament.minuit,
                                       overflow: TextOverflow.ellipsis, maxLines: 2,
@@ -178,12 +177,12 @@ class _DetailOrdonnancePourPatientState
                               }
                           );
                         } else {
-                          return Center(
+                          return const Center(
                             child: Text("Vous n'avez pas encore des médicaments"),
                           );
                         }
                       } else {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }

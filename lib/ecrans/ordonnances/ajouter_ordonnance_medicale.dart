@@ -1,7 +1,7 @@
+import 'package:Ordonnances/ecrans/ordonnances/listeOrdonnances.dart';
+import 'package:Ordonnances/models/docteur.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/models/docteur.dart';
 import '../../couleurs/couleurs.dart';
 import '../../services/servicesFirestoreOrdonnance.dart';
 
@@ -26,7 +26,7 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ajouter ordonnance médicale"),
+        title: const Text("Ajouter ordonnance médicale"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -37,23 +37,23 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
           children: [
             Container(
               color: CouleursApplications.appBarVert,
-              child: Image(
+              child: const Image(
                 image: AssetImage('images/header-ordonnance-medicale.png'),
               ),
             ),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Card(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
                         "MALADIES",
@@ -64,24 +64,24 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5.0,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: TextField(
                         minLines: 2,
                         maxLines: 5,
                         controller: controlleurMaladie,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
                         "DESCRIPTIONS",
@@ -93,28 +93,28 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: TextField(
                         controller: controlleurDescriptionsMaladie,
                         minLines: 6,
                         maxLines: 10,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40.0,
                     ),
                     chargement
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 30.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 30.0),
                             child: Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
-                                child: Text("Créer l'ordonnance", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
+                                child: const Text("Créer l'ordonnance", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: CouleursApplications.appBarVert, // Set background color here
                                 ),
@@ -122,7 +122,7 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
                                   if (controlleurMaladie.text == "" ||
                                       controlleurDescriptionsMaladie == "") {
                                     ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
+                                        .showSnackBar(const SnackBar(
                                       content:
                                           Text("Tous les champs sont requis"),
                                       backgroundColor: Colors.red,
@@ -131,7 +131,6 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
                                     setState(() {
                                       chargement = true;
                                     });
-                                    print(widget.docteur.id);
                                     await ServicesFirestoreOrdonnances()
                                         .insererOrdonnance(
                                             controlleurMaladie.text,
@@ -154,7 +153,7 @@ class _AjouterOrdonnanceState extends State<AjouterOrdonnance> {
                               ),
                             ),
                           ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                   ],

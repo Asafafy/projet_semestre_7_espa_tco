@@ -1,9 +1,8 @@
-import 'dart:ui';
+import 'package:Ordonnances/couleurs/couleurs.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/authentificationDocteur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:projet_semestre_7_espa_tco/couleurs/couleurs.dart';
 
 class ConnexionDocteur extends StatefulWidget {
   User patient;
@@ -26,7 +25,7 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Authentification du Docteur"),
+        title: const Text("Authentification du Docteur"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -35,7 +34,7 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
         color: CouleursApplications.fondApplication,
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Padding(
@@ -46,8 +45,8 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
                     color: CouleursApplications.fondListTile,
                     borderRadius: BorderRadius.circular(800.0),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
                     child: Image(
                       image: AssetImage('images/docteur.png'),
                     ),
@@ -56,9 +55,9 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
 
 
             Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
               child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Column(
                   children: [
@@ -67,13 +66,13 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
                       const EdgeInsets.only(left: 20.0, top: 30.0, right: 20.0),
                       child: TextField(
                         controller: controlleurNomDocteur,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Nom du docteur",
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     Padding(
@@ -82,17 +81,17 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
                         obscuringCharacter: "*",
                         obscureText: true,
                         controller: controlleurMotDePasseDocteur,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Mot de passe du docteur",
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50.0,
                     ),
                     chargement
-                        ? LinearProgressIndicator()
+                        ? const LinearProgressIndicator()
                         : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Container(
@@ -102,14 +101,14 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: CouleursApplications.appBarVert, // Set background color here
                           ),
-                          child: Text("Envoyer", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
+                          child: const Text("Envoyer", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
                           onPressed: () async {
                             setState(() {
                               chargement = true;
                             });
                             if (controlleurNomDocteur.text == "" ||
                                 controlleurMotDePasseDocteur.text == "") {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text("Tous les champs sont requis !"),
                                 backgroundColor: Colors.red,
                               ));
@@ -129,17 +128,17 @@ class _ConnexionDocteurState extends State<ConnexionDocteur> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 30,),
                   ],
                 ),
               ),
             ),
 
 
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Center(
+            const Center(
               child: Text("  Contactez le responsable pour avoir un compte docteur",
                   style: TextStyle(
                       fontStyle: FontStyle.italic, color: Colors.green)),

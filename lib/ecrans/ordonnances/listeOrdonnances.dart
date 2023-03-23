@@ -1,13 +1,13 @@
+import 'package:Ordonnances/ecrans/authentificationsDocteurs/connexion_docteur.dart';
+import 'package:Ordonnances/ecrans/ordonnances/detailOrdonnancePourPatient.dart';
+import 'package:Ordonnances/models/modeleOrdonnanceMedicale.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/detailOrdonnancePourPatient.dart';
 import '../../couleurs/couleurs.dart';
 import '../../services/authentificationPatients.dart';
 import '../authentificationsUtilisateurs/se_connecter.dart';
-import 'package:projet_semestre_7_espa_tco/models/modeleOrdonnanceMedicale.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/authentificationsDocteurs/connexion_docteur.dart';
-import 'package:intl/intl.dart';
+import "package:intl/intl.dart";
 
 
 class ListeOrdonnances extends StatelessWidget {
@@ -21,7 +21,7 @@ class ListeOrdonnances extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Liste des ordonnances"),
+        title: const Text("Liste des ordonnances"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -31,8 +31,8 @@ class ListeOrdonnances extends StatelessWidget {
               await ServicesAuthentifications().seDeconnecter();
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>SeConnecter()), (route) => false);
             },
-            icon: Icon(Icons.logout, color: CouleursApplications.textesAppBar,),
-            label: Text("Déconnecter", style: TextStyle(color: CouleursApplications.textesAppBar),),
+            icon: const Icon(Icons.logout, color: CouleursApplications.textesAppBar,),
+            label: const Text("Déconnecter", style: TextStyle(color: CouleursApplications.textesAppBar),),
             style: TextButton.styleFrom(foregroundColor: Colors.black54),
           ),
         ],
@@ -49,17 +49,16 @@ class ListeOrdonnances extends StatelessWidget {
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     ModeleOrdonnanceMedicale ordonnance = ModeleOrdonnanceMedicale.fromJson(snapshot.data.docs[index]);
-                    print(ordonnance);
                     return Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       elevation: 5,
                       color: Colors.white54,
-                       margin: EdgeInsets.all(10.0),
+                       margin: const EdgeInsets.all(10.0),
                        child: ListTile(
                          leading: IconButton(
-                           icon: CircleAvatar(
+                           icon: const CircleAvatar(
                              backgroundColor: CouleursApplications.appBarVert,
                              foregroundColor: CouleursApplications.textesAppBar,
                              child: Icon(Icons.edit)),
@@ -67,10 +66,10 @@ class ListeOrdonnances extends StatelessWidget {
                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ConnexionDocteur(utilisateur, ordonnance.date, true)));
                            },
                          ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        title: Text(ordonnance.maladie, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        title: Text(ordonnance.maladie, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
                         subtitle: Text(ordonnance.descriptionsMaladie, overflow: TextOverflow.ellipsis, maxLines: 2,),
-                        trailing: Text(DateFormat('dd-MM-yy').format(ordonnance.date.toDate()), style: TextStyle(fontStyle: FontStyle.italic),),
+                        trailing: Text(DateFormat('dd-MM-yy').format(ordonnance.date.toDate()), style: const TextStyle(fontStyle: FontStyle.italic),),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailOrdonnancePourPatient(utilisateur, ordonnance)));
                         },
@@ -79,12 +78,12 @@ class ListeOrdonnances extends StatelessWidget {
                   }
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text("Vous n'avez pas encore des ordonnances médicales"),
               );
             }
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -96,7 +95,7 @@ class ListeOrdonnances extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ConnexionDocteur(utilisateur, null, false)));
         },

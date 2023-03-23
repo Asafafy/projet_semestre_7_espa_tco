@@ -1,8 +1,8 @@
+import 'package:Ordonnances/couleurs/couleurs.dart';
+import 'package:Ordonnances/ecrans/authentificationsUtilisateurs/s_inscrire.dart';
+import 'package:Ordonnances/ecrans/ordonnances/listeOrdonnances.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_semestre_7_espa_tco/couleurs/couleurs.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/authentificationsUtilisateurs/s_inscrire.dart';
 import '../../services/authentificationPatients.dart';
 
 
@@ -23,7 +23,7 @@ class _SeConnecterState extends State<SeConnecter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Se connecter"),
+        title: const Text("Se connecter"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -34,45 +34,45 @@ class _SeConnecterState extends State<SeConnecter> {
           children: [
             Container(
               color: CouleursApplications.appBarVert,
-              child: Image(
+              child: const Image(
                 image: AssetImage('images/banniere-ordonnance-medicale.png'),
               ),
             ),
-            SizedBox(height: 50.0,),
+            const SizedBox(height: 50.0,),
 
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 elevation: 5,
                 child: Column(
                   children: [
-                    SizedBox(height: 30.0,),
+                    const SizedBox(height: 30.0,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         controller: controlleurEmail,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Email",
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0,),
+                    const SizedBox(height: 20.0,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         obscuringCharacter: "*",
                         obscureText: true,
                         controller: controlleurMotDePasse,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Mot de passe",
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    SizedBox(height: 50.0,),
-                    chargement ? LinearProgressIndicator() : Padding(
+                    const SizedBox(height: 50.0,),
+                    chargement ? const LinearProgressIndicator() : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Container(
                         height: 50,
@@ -81,18 +81,16 @@ class _SeConnecterState extends State<SeConnecter> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: CouleursApplications.appBarVert, // Set background color here
                           ),
-                          child: Text("Envoyer", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
+                          child: const Text("Envoyer", style: TextStyle(fontSize: 20, color: CouleursApplications.textesAppBar),),
                           onPressed: () async {
                             setState(() {
                               chargement = true;
                             });
                             if (controlleurEmail.text == ""  || controlleurMotDePasse.text == "") {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Tous les champs sont requis !"), backgroundColor: Colors.red,));
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Tous les champs sont requis !"), backgroundColor: Colors.red,));
                             } else {
                               User? resultat = await ServicesAuthentifications().seConnecter(controlleurEmail.text, controlleurMotDePasse.text, context);
                               if (resultat != null) {
-                                print("Connexion avec succès");
-                                print(resultat.email);
                                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ListeOrdonnances(resultat)), (route) => false);
                               }
                             }
@@ -103,18 +101,18 @@ class _SeConnecterState extends State<SeConnecter> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.0),
+                    const SizedBox(height: 30.0),
                   ],
                 ),
               ),
             ),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             TextButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>SInscrire()));
               },
-              child: Text("Vous n'avez pas de compte? Créez-en un")
+              child: const Text("Vous n'avez pas de compte? Créez-en un")
             ),
           ],
         ),

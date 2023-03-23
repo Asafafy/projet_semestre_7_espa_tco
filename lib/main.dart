@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:projet_semestre_7_espa_tco/ecranChargement.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/services/authentificationPatients.dart';
+import 'ecranChargement.dart';
 import 'ecrans/authentificationsUtilisateurs/se_connecter.dart';
+import 'ecrans/ordonnances/listeOrdonnances.dart';
+import 'services/authentificationPatients.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   Future<void> _chargerDonnees() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   // This widget is the root of your application.
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else {
-            return EcranChargement();
+            return const EcranChargement();
           }
         }
     );

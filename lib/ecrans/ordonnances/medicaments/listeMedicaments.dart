@@ -1,11 +1,11 @@
+import 'package:Ordonnances/ecrans/ordonnances/medicaments/ajouterMedicaments.dart';
+import 'package:Ordonnances/ecrans/ordonnances/medicaments/modifierMedicament.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/ajouterMedicaments.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/modifierMedicament.dart';
-import 'package:projet_semestre_7_espa_tco/models/modeleMedicaments.dart';
-import 'package:projet_semestre_7_espa_tco/models/modeleOrdonnanceMedicale.dart';
 import '../../../couleurs/couleurs.dart';
+import '../../../models/modeleMedicaments.dart';
+import '../../../models/modeleOrdonnanceMedicale.dart';
 
 class ListeMedicaments extends StatelessWidget {
   User patient;
@@ -19,7 +19,7 @@ class ListeMedicaments extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Liste des médicaments"),
+        title: const Text("Liste des médicaments"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -45,17 +45,17 @@ class ListeMedicaments extends StatelessWidget {
                       ),
                       elevation: 5,
                       color: Colors.green.shade100,
-                      margin: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.all(10.0),
                       child: ListTile(
                         leading: IconButton(
-                          icon: CircleAvatar(
+                          icon: const CircleAvatar(
                               backgroundColor: CouleursApplications.appBarVert,
                               foregroundColor: CouleursApplications.textesAppBar,
                               child: Icon(Icons.list)),
                           onPressed: () async {},
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        title: Text(medicament.nomMedicament, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        title: Text(medicament.nomMedicament, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: CouleursApplications.appBarVert),),
                         subtitle: Text(
                           "Matin : " + medicament.matin + "     Midi : " + medicament.midi + "     Soir : " + medicament.soir + "     Minuit : " + medicament.minuit,
                           overflow: TextOverflow.ellipsis, maxLines: 2,
@@ -69,12 +69,12 @@ class ListeMedicaments extends StatelessWidget {
                   }
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text("Vous n'avez pas encore des médicaments"),
               );
             }
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -86,7 +86,7 @@ class ListeMedicaments extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AjouterMedicaments(patient, ordonnanceMedicale, null)));
         },

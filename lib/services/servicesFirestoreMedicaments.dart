@@ -18,7 +18,6 @@ class ServicesFirestoreMedicaments {
         "nbrJour": nbrJour,
       });
     } catch (e) {
-      print(e);
     }
   }
 
@@ -39,7 +38,6 @@ class ServicesFirestoreMedicaments {
         "nbrJour": nbrJour,
       });
     } catch (e) {
-      print(e);
     }
   }
 

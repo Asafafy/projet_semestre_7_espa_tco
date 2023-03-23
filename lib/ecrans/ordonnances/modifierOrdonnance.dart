@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/listeOrdonnances.dart';
-import 'package:projet_semestre_7_espa_tco/ecrans/ordonnances/medicaments/listeMedicaments.dart';
-import 'package:projet_semestre_7_espa_tco/models/modeleMedicaments.dart';
-import 'package:projet_semestre_7_espa_tco/models/modeleOrdonnanceMedicale.dart';
 import '../../couleurs/couleurs.dart';
+import '../../models/modeleMedicaments.dart';
+import '../../models/modeleOrdonnanceMedicale.dart';
 import '../../services/servicesFirestoreOrdonnance.dart';
+import 'listeOrdonnances.dart';
+import 'medicaments/listeMedicaments.dart';
 
 class ModifierOrdonnance extends StatefulWidget {
   User patient;
@@ -35,7 +35,7 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Modifier des notes"),
+        title: const Text("Modifier des notes"),
         centerTitle: true,
         backgroundColor: CouleursApplications.appBarVert,
         foregroundColor: CouleursApplications.textesAppBar,
@@ -46,8 +46,8 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text("Confirmation de la suppresion"),
-                    content: Text(
+                    title: const Text("Confirmation de la suppresion"),
+                    content: const Text(
                         "Êtes-vous sûr de vouloir supprimer cette ordonnance ?"),
                     actions: [
                       TextButton(
@@ -61,10 +61,10 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                                       ListeOrdonnances(widget.patient)),
                               (route) => false);
                         },
-                        child: Text("Oui"),
+                        child: const Text("Oui"),
                       ),
                       TextButton(
-                        child: Text("Non"),
+                        child: const Text("Non"),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -74,7 +74,7 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                 },
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
               color: CouleursApplications.textesAppBar,
             ),
@@ -87,25 +87,25 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
             children: [
               Container(
                 color: CouleursApplications.appBarVert,
-                child: Image(
+                child: const Image(
                   image: AssetImage('images/header-ordonnance-medicale.png'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40.0,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Card(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   elevation: 5,
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30.0),
                         child: Text(
                           "MALADIES",
@@ -116,24 +116,24 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
                         child: TextField(
                           minLines: 2,
                           maxLines: 5,
                           controller: controlleurMaladie,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30.0),
                         child: Text(
                           "DESCRIPTIONS",
@@ -145,25 +145,25 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
                         child: TextField(
                           controller: controlleurDescriptionsMaladie,
                           minLines: 6,
                           maxLines: 10,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
-                          child: Text(
+                          child: const Text(
                             "Liste des medicaments",
                             style: TextStyle(
                                 fontSize: 20,
@@ -181,19 +181,19 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       chargement
-                          ? Center(
+                          ? const Center(
                               child: CircularProgressIndicator(),
                             )
                           : Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               height: 50,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
-                                child: Text(
+                                child: const Text(
                                   "Mettre à jour",
                                   style: TextStyle(
                                       fontSize: 20,
@@ -208,7 +208,7 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                                       controlleurDescriptionsMaladie.text ==
                                           "") {
                                     ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
+                                        .showSnackBar(const SnackBar(
                                       content:
                                           Text("Tous les champs sont requis"),
                                       backgroundColor: Colors.red,
@@ -237,7 +237,7 @@ class _ModifierOrdonnanceState extends State<ModifierOrdonnance> {
                                 },
                               ),
                             ),
-                      SizedBox(height: 30,),
+                      const SizedBox(height: 30,),
                     ],
                   ),
                 ),
